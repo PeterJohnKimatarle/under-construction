@@ -25,70 +25,65 @@
         align-items: center;
         justify-content: flex-start;
         padding: clamp(2.5rem, 12vh, 7rem) 1.5rem max(1.5rem, env(safe-area-inset-bottom));
-        background: transparent;
+        background: #ddf4ff;
         color: #1f2933;
-        overflow-x: hidden;
-        overflow-y: hidden;
+        overflow: hidden;
         position: relative;
       }
 
-      body::before {
+      body::before,
+      body::after {
         content: "";
-        position: absolute;
+        position: fixed;
         inset: 0;
-        background:
-          radial-gradient(42% 42% at 18% 24%, rgba(59, 130, 246, 0.28), transparent 72%),
-          radial-gradient(48% 48% at 82% 16%, rgba(139, 92, 246, 0.24), transparent 75%),
-          radial-gradient(58% 58% at 50% 94%, rgba(16, 185, 129, 0.22), transparent 78%);
-        animation: pulseGlow 12s ease-in-out infinite;
-        opacity: 0.8;
         pointer-events: none;
+        transform-origin: center;
+        mix-blend-mode: screen;
+      }
+
+      body::before {
+        background: repeating-radial-gradient(
+          circle at center,
+          rgba(59, 130, 246, 0.35) 0 3px,
+          rgba(59, 130, 246, 0.04) 3px 20px
+        );
+        opacity: 0.55;
+        animation: radarPulseWide 12s ease-in-out infinite;
         z-index: 0;
-        will-change: transform, opacity;
       }
 
       body::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        display: block;
         background:
-          radial-gradient(circle, rgba(59, 130, 246, 0.65) 0%, rgba(59, 130, 246, 0.28) 40%, rgba(59, 130, 246, 0) 62%),
-          radial-gradient(circle, rgba(59, 130, 246, 0.45) 0%, rgba(59, 130, 246, 0.18) 45%, rgba(59, 130, 246, 0) 68%);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 38vmin 38vmin, 60vmin 60vmin;
-        animation: radarPulse 6s linear infinite;
-        pointer-events: none;
+          conic-gradient(
+            from 0deg,
+            rgba(59, 130, 246, 0) 0deg 300deg,
+            rgba(59, 130, 246, 0.7) 310deg,
+            rgba(59, 130, 246, 0.15) 330deg,
+            rgba(59, 130, 246, 0) 360deg
+          );
+        opacity: 0.8;
+        animation: radarSweep 4.8s linear infinite;
         z-index: 1;
-        opacity: 0.7;
-        will-change: transform, opacity;
       }
 
-      @keyframes pulseGlow {
+      @keyframes radarPulseWide {
         0%,
         100% {
-          transform: translate3d(0, 0, 0) scale(1);
-          opacity: 0.7;
+          transform: scale(0.9);
+          opacity: 0.45;
         }
         50% {
-          transform: translate3d(0, -2%, 0) scale(1.08);
-          opacity: 0.95;
+          transform: scale(1.1);
+          opacity: 0.7;
         }
       }
 
-      @keyframes radarPulse {
+      @keyframes radarSweep {
         0% {
-          transform: translate3d(0, 0, 0) scale(0.65);
-          opacity: 0.7;
-        }
-        50% {
-          transform: translate3d(0, -1.5%, 0) scale(1.05);
-          opacity: 0.45;
+          transform: rotate(0deg);
         }
         100% {
-          transform: translate3d(0, -3%, 0) scale(1.4);
-          opacity: 0;
+          transform: rotate(360deg);
         }
       }
 
