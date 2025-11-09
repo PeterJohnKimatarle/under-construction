@@ -201,13 +201,7 @@
         <h2 id="contactDialogTitle">How would you like to get in touch?</h2>
         <div class="actions">
           <a href="tel:+254745120140" id="callLink" data-action="call">Call</a>
-          <a
-            href="https://wa.me/254745120140"
-            id="whatsappLink"
-            data-action="whatsapp"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://wa.me/254745120140" id="whatsappLink" data-action="whatsapp">
             WhatsApp
           </a>
         </div>
@@ -220,6 +214,9 @@
       const closeDialogButton = document.getElementById("closeDialog");
       const callLink = document.getElementById("callLink");
       const whatsappLink = document.getElementById("whatsappLink");
+      const prefersDesktopLikePointer = window.matchMedia(
+        "(hover: hover) and (pointer: fine)"
+      );
 
       function openDialog() {
         contactDialog.classList.add("active");
@@ -247,6 +244,19 @@
       window.addEventListener("keydown", handleKeyDown);
       callLink.addEventListener("click", hideDialog);
       whatsappLink.addEventListener("click", hideDialog);
+
+      function setWhatsAppTarget(e) {
+        if (e.matches) {
+          whatsappLink.setAttribute("target", "_blank");
+          whatsappLink.setAttribute("rel", "noopener noreferrer");
+        } else {
+          whatsappLink.removeAttribute("target");
+          whatsappLink.removeAttribute("rel");
+        }
+      }
+
+      setWhatsAppTarget(prefersDesktopLikePointer);
+      prefersDesktopLikePointer.addEventListener("change", setWhatsAppTarget);
     </script>
   </body>
 </html>
