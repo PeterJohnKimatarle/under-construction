@@ -75,6 +75,8 @@
         border: none;
         cursor: pointer;
         text-decoration: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
       }
 
       @media (hover: hover) and (pointer: fine) {
@@ -153,10 +155,14 @@
         color: #1f2933;
         background: #e2e8f0;
         transition: background 0.2s ease;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
       }
 
-      .dialog .actions a:hover {
-        background: #facc15;
+      @media (hover: hover) and (pointer: fine) {
+        .dialog .actions a:hover {
+          background: #facc15;
+        }
       }
 
       .dialog .close {
@@ -166,6 +172,8 @@
         color: #475569;
         font-weight: 600;
         cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .dialog .close:hover,
@@ -182,9 +190,9 @@
         we give it some final touches.
       </p>
       <div class="contact">
-        <p>For more details</p>
+        <p><strong>For more information</strong></p>
         <button type="button" id="ctaButton">
-          Call/WA <span>0745-120-140</span>
+          Call / WA <span>0745-120-140</span>
         </button>
       </div>
     </main>
