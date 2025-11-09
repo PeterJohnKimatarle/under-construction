@@ -14,8 +14,10 @@
         min-height: 100vh;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
+        padding: clamp(2.5rem, 12vh, 7rem) 1.5rem 2.5rem;
         background: linear-gradient(135deg, #f2f5f9, #dbe2ef);
         color: #1f2933;
       }
@@ -44,9 +46,10 @@
 
       .contact {
         display: grid;
-        gap: 1rem;
+        gap: 1.25rem;
         justify-items: center;
         color: #1f2933;
+        max-width: 34rem;
       }
 
       .contact span {
@@ -90,16 +93,12 @@
         we give it some final touches.
       </p>
       <div class="contact">
-        <p>
-          For more information, call or WhatsApp
-          <span>0745-120-140</span>.
-        </p>
         <a
           href="https://wa.me/0745120140"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Call/WA
+          Call/WA <span>0745-120-140</span>
         </a>
       </div>
     </main>
