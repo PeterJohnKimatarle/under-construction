@@ -200,8 +200,8 @@
       <div class="dialog">
         <h2 id="contactDialogTitle">How would you like to get in touch?</h2>
         <div class="actions">
-          <a href="tel:+254745120140">Call</a>
-          <a href="https://wa.me/254745120140" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a href="tel:+254745120140" id="callLink" data-action="call">Call</a>
+          <a href="https://wa.me/254745120140" id="whatsappLink" data-action="whatsapp">WhatsApp</a>
         </div>
         <button class="close" type="button" id="closeDialog">Cancel</button>
       </div>
@@ -209,26 +209,36 @@
     <script>
       const ctaButton = document.getElementById("ctaButton");
       const contactDialog = document.getElementById("contactDialog");
-      const closeDialog = document.getElementById("closeDialog");
+      const closeDialogButton = document.getElementById("closeDialog");
+      const callLink = document.getElementById("callLink");
+      const whatsappLink = document.getElementById("whatsappLink");
 
       function openDialog() {
         contactDialog.classList.add("active");
       }
 
-      function closeDialogHandler(event) {
-        if (
-          event.target === contactDialog ||
-          event.target === closeDialog ||
-          event.key === "Escape"
-        ) {
-          contactDialog.classList.remove("active");
+      function hideDialog() {
+        contactDialog.classList.remove("active");
+      }
+
+      function handleBackdropClick(event) {
+        if (event.target === contactDialog) {
+          hideDialog();
+        }
+      }
+
+      function handleKeyDown(event) {
+        if (event.key === "Escape") {
+          hideDialog();
         }
       }
 
       ctaButton.addEventListener("click", openDialog);
-      closeDialog.addEventListener("click", closeDialogHandler);
-      contactDialog.addEventListener("click", closeDialogHandler);
-      window.addEventListener("keydown", closeDialogHandler);
+      closeDialogButton.addEventListener("click", hideDialog);
+      contactDialog.addEventListener("click", handleBackdropClick);
+      window.addEventListener("keydown", handleKeyDown);
+      callLink.addEventListener("click", hideDialog);
+      whatsappLink.addEventListener("click", hideDialog);
     </script>
   </body>
 </html>
