@@ -43,15 +43,42 @@
       }
 
       .contact {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-weight: 600;
+        display: grid;
+        gap: 1rem;
+        justify-items: center;
         color: #1f2933;
       }
 
       .contact span {
+        font-weight: 600;
         font-variant-numeric: tabular-nums;
+      }
+
+      .contact a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.85rem clamp(1.5rem, 6vw, 3rem);
+        border-radius: 999px;
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: #f8fafc;
+        font-size: 1.05rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 18px 30px -15px rgba(37, 99, 235, 0.6);
+      }
+
+      .contact a:hover,
+      .contact a:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 38px -16px rgba(37, 99, 235, 0.65);
+      }
+
+      .contact a:active {
+        transform: translateY(0);
+        box-shadow: 0 12px 20px -10px rgba(37, 99, 235, 0.5);
       }
     </style>
   </head>
@@ -62,10 +89,19 @@
         Thanks for stopping by! This project is currently under construction as
         we give it some final touches.
       </p>
-      <p class="contact">
-        For more information, call or WhatsApp
-        <span>0745-120-140</span>.
-      </p>
+      <div class="contact">
+        <p>
+          For more information, call or WhatsApp
+          <span>0745-120-140</span>.
+        </p>
+        <a
+          href="https://wa.me/0745120140"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Call/WA
+        </a>
+      </div>
     </main>
   </body>
 </html>
