@@ -57,7 +57,7 @@
         font-variant-numeric: tabular-nums;
       }
 
-      .contact a {
+      .contact button {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -68,20 +68,103 @@
         color: #f8fafc;
         font-size: 1.05rem;
         font-weight: 600;
+        border: none;
+        cursor: pointer;
         text-decoration: none;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: 0 18px 30px -15px rgba(37, 99, 235, 0.6);
       }
 
-      .contact a:hover,
-      .contact a:focus-visible {
-        transform: translateY(-2px);
-        box-shadow: 0 22px 38px -16px rgba(37, 99, 235, 0.65);
+      .contact button:hover {
+        background: #facc15;
+        color: #1f2933;
       }
 
-      .contact a:active {
-        transform: translateY(0);
-        box-shadow: 0 12px 20px -10px rgba(37, 99, 235, 0.5);
+      .contact button:focus-visible {
+        outline: 3px solid rgba(250, 204, 21, 0.6);
+        outline-offset: 2px;
+      }
+
+      .contact button:active {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: #f8fafc;
+      }
+
+      .dialog-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease;
+      }
+
+      .dialog-backdrop.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .dialog {
+        background: #ffffff;
+        border-radius: 1rem;
+        padding: 2rem clamp(1.25rem, 4vw, 2.5rem);
+        box-shadow: 0 24px 48px -20px rgba(15, 23, 42, 0.4);
+        max-width: 26rem;
+        width: 100%;
+        text-align: center;
+      }
+
+      .dialog h2 {
+        margin: 0 0 1.25rem;
+        font-size: 1.5rem;
+        color: #1f2933;
+      }
+
+      .dialog .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      @media (min-width: 480px) {
+        .dialog .actions {
+          flex-direction: row;
+          justify-content: center;
+        }
+      }
+
+      .dialog .actions a {
+        flex: 1 1 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.85rem 1.5rem;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 600;
+        color: #1f2933;
+        background: #e2e8f0;
+        transition: background 0.2s ease;
+      }
+
+      .dialog .actions a:hover {
+        background: #facc15;
+      }
+
+      .dialog .close {
+        margin-top: 1.25rem;
+        background: none;
+        border: none;
+        color: #475569;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .dialog .close:hover,
+      .dialog .close:focus-visible {
+        text-decoration: underline;
       }
     </style>
   </head>
@@ -93,15 +176,46 @@
         we give it some final touches.
       </p>
       <div class="contact">
-        <a
-          href="https://wa.me/0745120140"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <p>For more details</p>
+        <button type="button" id="ctaButton">
           Call/WA <span>0745-120-140</span>
-        </a>
+        </button>
       </div>
     </main>
+    <div class="dialog-backdrop" id="contactDialog" role="dialog" aria-modal="true" aria-labelledby="contactDialogTitle">
+      <div class="dialog">
+        <h2 id="contactDialogTitle">How would you like to get in touch?</h2>
+        <div class="actions">
+          <a href="tel:0745120140">Call</a>
+          <a href="https://wa.me/0745120140" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </div>
+        <button class="close" type="button" id="closeDialog">Cancel</button>
+      </div>
+    </div>
+    <script>
+      const ctaButton = document.getElementById("ctaButton");
+      const contactDialog = document.getElementById("contactDialog");
+      const closeDialog = document.getElementById("closeDialog");
+
+      function openDialog() {
+        contactDialog.classList.add("active");
+      }
+
+      function closeDialogHandler(event) {
+        if (
+          event.target === contactDialog ||
+          event.target === closeDialog ||
+          event.key === "Escape"
+        ) {
+          contactDialog.classList.remove("active");
+        }
+      }
+
+      ctaButton.addEventListener("click", openDialog);
+      closeDialog.addEventListener("click", closeDialogHandler);
+      contactDialog.addEventListener("click", closeDialogHandler);
+      window.addEventListener("keydown", closeDialogHandler);
+    </script>
   </body>
 </html>
 
