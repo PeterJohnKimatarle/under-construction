@@ -45,6 +45,8 @@
         margin-top: 0;
         font-size: clamp(2rem, 5vw, 3rem);
         letter-spacing: 0.04em;
+        word-break: keep-all;
+        white-space: normal;
       }
 
       .card p {
@@ -188,6 +190,12 @@
       .dialog .close:hover,
       .dialog .close:focus-visible {
         text-decoration: underline;
+      }
+
+      @media (min-width: 960px) {
+        .card h1 {
+          font-size: 2.5rem;
+        }
       }
     </style>
   </head>
